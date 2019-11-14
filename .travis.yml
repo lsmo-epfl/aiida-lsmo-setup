@@ -1,0 +1,43 @@
+language: python
+dist: trusty
+
+python:
+  - 3.6
+
+services:
+  - postgresql
+  - rabbitmq
+
+addons:
+  postgresql: "10"
+
+matrix:
+  global:
+    - AIIDA_PATH=${HOME}/aiida1
+
+  include:
+    - env:
+        TEST: package
+    - env:
+        TEST: editable
+    #- name: docs
+    #  env:
+    #    READTHEDOCS: 'True'
+    #    TEST_TYPE: docs
+
+install:
+  - wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+  - bash Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda
+  - source "$HOME/miniconda/etc/profile.d/conda.sh"
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda info -a
+  - conda create -q -n aiida1 python=3.6
+  - conda activate aiida1
+
+script:
+  - if [ "$TEST" == "package" ] ; then ./install_packages.sh; fi
+  - if [ "$TEST" == "editable" ] ; then ./install_editable.sh; fi
+  - .ci/install_codes.sh
+#  - pytest
+#  - if [ "$TEST_TYPE" == "docs" ] ; then cd docs; make; fi

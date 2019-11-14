@@ -1,0 +1,4 @@
+username: talirz
+safe_interval: 10
+look_for_keys: True
+key_policy: AutoAddPolicy

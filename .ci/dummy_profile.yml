@@ -1,0 +1,7 @@
+profile: testing
+first_name: Leopold
+last_name: Talirz
+institution: EPFL
+db_backend: django
+db_host: "localhost "
+email: 123@234.de
