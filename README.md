@@ -45,10 +45,8 @@ from the AiiDA documentation.
 
 ## 4. add variables to environment
 ```
-CONDA_DIST=miniconda #or anaconda3
-mkdir -p $HOME/$CONDA_DIST/envs/aiida1/etc/conda/activate.d
-
-cat > $HOME/$CONDA_DIST/envs/aiida1/etc/conda/activate.d/aiida-init.sh << EOF
+mkdir -p $CONDA_PREFIX_1/envs/aiida1/etc/conda/activate.d
+cat > $CONDA_PREFIX_1/envs/aiida1/etc/conda/activate.d/aiida-init.sh << EOF
 export AIIDA_PATH=$HOME/aiida1
 eval "\$(_VERDI_COMPLETE=source verdi)"
 EOF
