@@ -1,10 +1,12 @@
 #!/bin/bash
+set -ex
+
 AIIDA_DIR=$AIIDA_PATH
 mkdir -p $AIIDA_DIR
 cd $AIIDA_DIR
 
 git clone https://github.com/aiidateam/aiida-core.git
-pip install -e aiida-core[testing]
+pip install -e aiida-core[testing,jupyter]
 
 git clone https://github.com/aiidateam/aiida-cp2k.git
 pip install -e aiida-cp2k

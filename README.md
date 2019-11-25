@@ -30,10 +30,29 @@ source install_editable.sh
 ```
 
 ## 4. install computers and codes
-Change the `username` in `computer-configure.yml` to your username and run:
+
+### set up AiiDA computers and codes
 ```
 git clone https://github.com/danieleongari/aiida-codes --depth 1
 cd aiida-codes
 
 ./setup.py
+```
+
+### generating a ssh keypair
+
+If you haven't done so already, generate a ssh keypair using `ssh-keygen -t rsa` and `ssh-copy-id username@remote` (see also [the AiiDA documentation](https://aiida-core.readthedocs.io/en/latest/get_started/computers.html)).
+
+### configure computers
+
+Change the `username` in `computer-configure.yml` to your username and run:
+```
+verdi computer configure localhost local
+verdi computer configure fidis ssh --config computer-configure.yml
+verdi computer configure deneb ssh --config computer-configure.yml
+```
+
+### test computers
+```
+verdi computer test fidis
 ```
