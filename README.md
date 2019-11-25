@@ -40,13 +40,14 @@ from the AiiDA documentation.
 ```
 #### alternative choice: install from PyPI
 ```
-./aiida-lsmo-setup/source install_packages.sh
+./aiida-lsmo-setup/install_packages.sh
 ```
 
 ## 4. add variables to environment
 ```
 CONDA_DIST=miniconda #or anaconda3
 mkdir -p $HOME/$CONDA_DIST/envs/aiida1/etc/conda/activate.d
+
 cat > $HOME/$CONDA_DIST/envs/aiida1/etc/conda/activate.d/aiida-init.sh << EOF
 export AIIDA_PATH=$HOME/aiida1
 eval "\$(_VERDI_COMPLETE=source verdi)"
@@ -59,13 +60,13 @@ instead of having them in your `.bashrc`.
 To make effective the `eval` for the command line autocompletion, restart your environment:
 
 ```
-conda activate aiida1
 conda deactivate
+conda activate aiida1
 ```
 
 ## 5. make your AiiDA profile
 
-Follow the instructions from:
+Run and follow the instructions of
 ```
 verdi quicksetup
 ```
