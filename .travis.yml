@@ -11,15 +11,13 @@ services:
 addons:
   postgresql: "10"
 
-matrix:
+env:
   global:
     - AIIDA_PATH=${HOME}/aiida1
 
-  include:
-    - env:
-        TEST: package
-    - env:
-        TEST: editable
+  jobs:
+    - TEST=package
+    - TEST=editable
     #- name: docs
     #  env:
     #    READTHEDOCS: 'True'
