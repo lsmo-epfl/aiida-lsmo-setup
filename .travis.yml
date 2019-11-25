@@ -11,15 +11,13 @@ services:
 addons:
   postgresql: "10"
 
-matrix:
+env:
   global:
     - AIIDA_PATH=${HOME}/aiida1
 
-  include:
-    - env:
-        TEST: package
-    - env:
-        TEST: editable
+  jobs:
+    - TEST=package
+    - TEST=editable
     #- name: docs
     #  env:
     #    READTHEDOCS: 'True'
@@ -39,5 +37,7 @@ script:
   - if [ "$TEST" == "package" ] ; then ./install_packages.sh; fi
   - if [ "$TEST" == "editable" ] ; then ./install_editable.sh; fi
   - .ci/install_codes.sh
+  - verdi computer configure local localhost
+  - verdi computer test localhost
 #  - pytest
 #  - if [ "$TEST_TYPE" == "docs" ] ; then cd docs; make; fi
