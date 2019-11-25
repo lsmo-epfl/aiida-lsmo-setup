@@ -33,7 +33,7 @@ source install_editable.sh
 
 ### set up AiiDA computers and codes
 ```
-git clone https://github.com/danieleongari/aiida-codes --depth 1
+git clone https://github.com/lsmo-epfl/aiida-lsmo-codes --depth 1
 cd aiida-codes
 
 ./setup.py
