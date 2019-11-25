@@ -6,7 +6,7 @@ mkdir -p $AIIDA_DIR
 cd $AIIDA_DIR
 
 git clone https://github.com/aiidateam/aiida-core.git
-pip install -e aiida-core[testing,jupyter]
+pip install -e aiida-core[testing,notebook]
 
 git clone https://github.com/aiidateam/aiida-cp2k.git
 pip install -e aiida-cp2k
