@@ -36,8 +36,10 @@ install:
 script:
   - if [ "$TEST" == "package" ] ; then ./install_packages.sh; fi
   - if [ "$TEST" == "editable" ] ; then ./install_editable.sh; fi
-  - .ci/install_codes.sh
-  - verdi computer configure local localhost
-  - verdi computer test localhost
+  - git clone https://github.com/lsmo-epfl/aiida-lsmo-codes --depth 1
+
+#  - ./aiida-lsmo-codes/setup.py --computer localhost
+#  - verdi computer configure local localhost
+#  - verdi computer test localhost
 #  - pytest
 #  - if [ "$TEST_TYPE" == "docs" ] ; then cd docs; make; fi
