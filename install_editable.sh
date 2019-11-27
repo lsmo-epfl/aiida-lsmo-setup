@@ -23,7 +23,7 @@ pip install -e aiida-raspa
 git -C calc_pe pull | git clone https://github.com/danieleongari/calc_pe.git --branch master
 pip install -e calc_pe
 
-git -C aiida-lsmo pull | git clone https://github.com/yakutovicha/aiida-lsmo.git --branch master
+git -C aiida-lsmo pull | git clone https://github.com/lsmo-epfl/aiida-lsmo.git --branch master
 pip install -e aiida-lsmo
 
 reentry scan
