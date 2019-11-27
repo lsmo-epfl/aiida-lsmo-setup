@@ -5,6 +5,7 @@
 ```
 mkdir $HOME/aiida1
 cd $HOME/aiida1
+git clone https://github.com/lsmo-epfl/aiida-lsmo-setup.git
 export AIIDA_PATH=${HOME}/aiida1
 ```
 
