@@ -3,7 +3,7 @@
 ## 0. create a directory to gather AiiDA related files
 
 ```
-mkdir $HOME/aiida1
+mkdir -p $HOME/aiida1
 cd $HOME/aiida1
 git clone https://github.com/lsmo-epfl/aiida-lsmo-setup.git
 export AIIDA_PATH=${HOME}/aiida1
@@ -15,16 +15,15 @@ If not yet present, [install conda](https://docs.conda.io/en/latest/miniconda.ht
 ```
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda
+source "$HOME/miniconda/etc/profile.d/conda.sh"
 conda init
 ```
-
-Create an enviroment called `aiida1` using python 3.6, proceed with the installation of the suggested minimal packages,
-and activate this new environment (remember to always activate the environment when using AiiDA!).
+Create an enviroment `aiida1` with python 3.6 and activate this new environment
 ```
-conda create -n aiida1 python=3.6
+conda create -n aiida1 python=3.6 -y
 conda activate aiida1
-
 ```
+Remember to always activate the environment before starting to use AiiDA.
 
 ## 2. install prerequisites
 
@@ -34,10 +33,12 @@ from the AiiDA documentation.
 ## 3. install AiiDA and plugins
 
 #### preferable choice: install from Github in editable mode
+This allows you to easily edit the AiiDA plugin packages and contribute back changes upstream:
 ```
 ./aiida-lsmo-setup/install_editable.sh
 ```
 #### alternative choice: install from PyPI
+This will use packaged versions of all plugins - easier to install:
 ```
 ./aiida-lsmo-setup/install_packages.sh
 ```
@@ -76,31 +77,23 @@ The only red cross should be for the *daemon*, that you will need to start later
 
 ## 6. install computers and codes
 
+### Setting up passwordless SSH access
+
+If you haven't done so already
+
+ * generate a ssh keypair using `ssh-keygen -t rsa` 
+ * set up passwordless access using `ssh-copy-id username@remote`
+
+See also [the AiiDA documentation](https://aiida-core.readthedocs.io/en/latest/get_started/computers.html).
+
 ### set up AiiDA computers and codes
+We have prepared a set of configuration files that allows you to quickly set up computers and codes used in the LSMO:
 ```
 git clone https://github.com/lsmo-epfl/aiida-lsmo-codes --depth 1
 cd aiida-lsmo-codes
-
-./setup.py
+./configure.py
 ```
-
-### generating a ssh keypair
-
-If you haven't done so already, generate a ssh keypair using `ssh-keygen -t rsa` and `ssh-copy-id username@remote`
-(see also [the AiiDA documentation](https://aiida-core.readthedocs.io/en/latest/get_started/computers.html)).
-
-### configure localhost
-```
-verdi computer configure local localhost
-```
-
-### configure clusters
-
-Change the `username` in `aiida-lsmo-setup/computer-configure.yml` to your username on the cluster, and run:
-```
-verdi computer configure ssh fidis --config computer-configure.yml
-```
-Press enter to confirm all the other default settings.
+See also [the AiiDA documentation](https://aiida-core.readthedocs.io/en/latest/get_started/computers.html#computer-setup-and-configuration) for manual configuration.
 
 ### test computers
 ```
