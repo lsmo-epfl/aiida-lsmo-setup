@@ -16,16 +16,14 @@ If not yet present, [install conda](https://docs.conda.io/en/latest/miniconda.ht
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda
 conda init
-conda create -n aiida1 python=3.6
 ```
 
-You can enter in this environment with
+Create an enviroment called `aiida1` using python 3.6, proceed with the installation of the suggested minimal packages,
+and activate this new environment (remember to always activate the environment when using AiiDA!).
 ```
+conda create -n aiida1 python=3.6
 conda activate aiida1
-```
-end go back to your base python environment with
-```
-conda deactivate
+
 ```
 
 ## 2. install prerequisites
@@ -56,7 +54,8 @@ Note that scripts in `activate.d` are executed at the activation of the environm
 Therefore, you can add here custom commands, e.g., aliases, that you want to use with AiiDA,
 instead of having them in your `.bashrc`.
 
-To make effective the `eval` for the command line autocompletion, restart your environment:
+To make effective the `eval` for the command line autocompletion, restart your environment.
+Note that `deactivate` allow you to come back to your main (i.e., `base`) python environment.
 
 ```
 conda deactivate
@@ -69,6 +68,11 @@ Run and follow the instructions of
 ```
 verdi quicksetup
 ```
+and check that everything is fine with:
+```
+verdi status
+```
+The only red cross should be for the *daemon*, that you will need to start later in order to submit a calculation.
 
 ## 6. install computers and codes
 
