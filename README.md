@@ -1,6 +1,6 @@
 # AiiDA setup for LSMO members
 
-## 0. create a directory to gather AiiDA related files
+## 1. create a directory to gather AiiDA related files
 
 ```
 mkdir -p $HOME/aiida1
@@ -9,7 +9,7 @@ git clone https://github.com/lsmo-epfl/aiida-lsmo-setup.git
 export AIIDA_PATH=${HOME}/aiida1
 ```
 
-## 1. install conda and create a new environment
+## 2. install conda and create a new environment
 
 If not yet present, [install conda](https://docs.conda.io/en/latest/miniconda.html):
 ```
@@ -25,12 +25,12 @@ conda activate aiida1
 ```
 Remember to always activate the environment before starting to use AiiDA.
 
-## 2. install prerequisites
+## 3. install prerequisites
 
 [Install prerequisites](https://aiida-core.readthedocs.io/en/latest/install/quick_installation.html#prerequisites)
 from the AiiDA documentation.
 
-## 3. install AiiDA and plugins
+## 4. install AiiDA and plugins
 
 #### preferable choice: install from Github in editable mode
 This allows you to easily edit the AiiDA plugin packages and contribute back changes upstream:
@@ -43,7 +43,7 @@ This will use packaged versions of all plugins - easier to install:
 ./aiida-lsmo-setup/install_packages.sh
 ```
 
-## 4. add variables to environment
+## 5. add variables to environment
 ```
 mkdir -p $CONDA_PREFIX/etc/conda/activate.d
 cat > $CONDA_PREFIX/etc/conda/activate.d/aiida-init.sh << EOF
@@ -63,7 +63,7 @@ conda deactivate
 conda activate aiida1
 ```
 
-## 5. make your AiiDA profile
+## 6. make your AiiDA profile
 
 Run and follow the instructions of
 ```
@@ -75,25 +75,38 @@ verdi status
 ```
 The only red cross should be for the *daemon*, that you will need to start later in order to submit a calculation.
 
-## 6. install computers and codes
+## 7. install computers and codes
 
 ### Setting up passwordless SSH access
 
 If you haven't done so already
 
- * generate a ssh keypair using `ssh-keygen -t rsa` 
+ * generate a ssh keypair using `ssh-keygen -t rsa`
  * set up passwordless access using `ssh-copy-id username@remote`
 
 See also [the AiiDA documentation](https://aiida-core.readthedocs.io/en/latest/get_started/computers.html).
 
 ### set up AiiDA computers and codes
+
 We have prepared a set of configuration files that allows you to quickly set up computers and codes used in the LSMO:
 ```
 git clone https://github.com/lsmo-epfl/aiida-lsmo-codes --depth 1
 cd aiida-lsmo-codes
 ./configure.py
 ```
-See also [the AiiDA documentation](https://aiida-core.readthedocs.io/en/latest/get_started/computers.html#computer-setup-and-configuration) for manual configuration.
+
+This scripts automates three steps: `verdi computer setup`, `verdi code setup` and `verdi computer configure`.
+It is important that you understand also the manual configuration from
+[the AiiDA documentation](https://aiida-core.readthedocs.io/en/latest/get_started/computers.html#computer-setup-and-configuration)
+to be able to add/modify/delete new codes and computers.
+
+Note that:
+* if a computer with the same name exists it won't be updated. One solution can be to `verdi computer rename` the label
+  of the previous computer, and also the label of the codes (i.e., `code@computer`) will be renamed.
+* if a code with the same label exists, it gets duplicated and the label is not anymore unique and you will need to use
+  its *PK* to load it). If this happens with `./configure.py`, you possibly ran the script twice, and you have better remove
+  the duplicate with `verdi code delete` (or, if you already used it `verdi node delete {PK}`, but all your calculations
+  associated to this code will also be removed!)
 
 ### test computers
 ```
