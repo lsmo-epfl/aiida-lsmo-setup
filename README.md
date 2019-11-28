@@ -112,3 +112,15 @@ Note that:
 ```
 verdi computer test fidis
 ```
+
+## 8. try out some examples
+
+Now that (some of) your computers and codes are configured, you can see them listed with `verdi code list`.
+You are ready to run some quick examples of work chains from the
+[aiida-lsmo repository](https://github.com/lsmo-epfl/aiida-lsmo).
+For example:
+```
+cd aiida-lsmo/examples
+verdi run run_IsothermWorkChain_HKUST-1.py raspa@localhost zeopp@localhost
+```
+Read [here the documentation](https://aiida-lsmo.readthedocs.io/) of LSMO's work chain and calculation functions.
