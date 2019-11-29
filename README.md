@@ -1,13 +1,9 @@
 # AiiDA setup for LSMO members
 
-## 1. create a directory to gather AiiDA related files
+## 1. install prerequisites
 
-```
-mkdir -p $HOME/aiida1
-cd $HOME/aiida1
-git clone https://github.com/lsmo-epfl/aiida-lsmo-setup.git
-export AIIDA_PATH=${HOME}/aiida1
-```
+[Install prerequisites](https://aiida-core.readthedocs.io/en/latest/install/quick_installation.html#prerequisites)
+from the AiiDA documentation.
 
 ## 2. install conda and create a new environment
 
@@ -25,10 +21,14 @@ conda activate aiida1
 ```
 Remember to always activate the environment before starting to use AiiDA.
 
-## 3. install prerequisites
+## 3. create a directory to gather AiiDA related files
 
-[Install prerequisites](https://aiida-core.readthedocs.io/en/latest/install/quick_installation.html#prerequisites)
-from the AiiDA documentation.
+```
+mkdir -p $HOME/aiida1
+cd $HOME/aiida1
+git clone https://github.com/lsmo-epfl/aiida-lsmo-setup.git
+export AIIDA_PATH=${HOME}/aiida1
+```
 
 ## 4. install AiiDA and plugins
 
