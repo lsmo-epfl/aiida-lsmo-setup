@@ -44,6 +44,8 @@ This will use packaged versions of all plugins - easier to install:
 ```
 
 ## 5. add variables to environment
+Conda executes scripts in a special `activate.d` folder upon activating an environment.
+Add there any custom commands, e.g., aliases, you want to use with AiiDA (instead of placing them in your `.bashrc`).
 ```
 mkdir -p $CONDA_PREFIX/etc/conda/activate.d
 cat > $CONDA_PREFIX/etc/conda/activate.d/aiida-init.sh << EOF
@@ -51,13 +53,9 @@ export AIIDA_PATH=$HOME/aiida1
 eval "\$(_VERDI_COMPLETE=source verdi)"
 EOF
 ```
-Note that scripts in `activate.d` are executed at the activation of the environment.
-Therefore, you can add here custom commands, e.g., aliases, that you want to use with AiiDA,
-instead of having them in your `.bashrc`.
+Here, we have specified the `AIIDA_PATH` and enabled tab-autocompletion for the `verdi` commands.
 
-To make effective the `eval` for the command line autocompletion, restart your environment.
-Note that `deactivate` allow you to come back to your main (i.e., `base`) python environment.
-
+Now, let's exit and reenter the environment in order for the changes to take effect:
 ```
 conda deactivate
 conda activate aiida1
@@ -73,7 +71,7 @@ and check that everything is fine with:
 ```
 verdi status
 ```
-The only red cross should be for the *daemon*, that you will need to start later in order to submit a calculation.
+The only red cross should be for the *daemon*, that you will start later before submitting a calculation.
 
 ## 7. install computers and codes
 
@@ -82,7 +80,7 @@ The only red cross should be for the *daemon*, that you will need to start later
 If you haven't done so already
 
  * generate a ssh keypair using `ssh-keygen -t rsa`
- * set up passwordless access using `ssh-copy-id username@remote`
+ * set up passwordless access using `ssh-copy-id username@remote` for the clusters you want to use with AiiDA (e.g. fidis, deneb)
 
 See also [the AiiDA documentation](https://aiida-core.readthedocs.io/en/latest/get_started/computers.html).
 
@@ -95,32 +93,28 @@ cd aiida-lsmo-codes
 ./configure.py
 ```
 
-This scripts automates three steps: `verdi computer setup`, `verdi code setup` and `verdi computer configure`.
-It is important that you understand also the manual configuration from
-[the AiiDA documentation](https://aiida-core.readthedocs.io/en/latest/get_started/computers.html#computer-setup-and-configuration)
-to be able to add/modify/delete new codes and computers.
+This scripts automates three steps: `verdi computer setup`, `verdi computer configure` and `verdi code setup`,
+which you can use whenever you need to add/modify/delete computers and computers.
+See [the AiiDA documentation](https://aiida-core.readthedocs.io/en/latest/get_started/computers.html#computer-setup-and-configuration) for more information.
 
-Note that:
-* if a computer with the same name exists it won't be updated. One solution can be to `verdi computer rename` the label
-  of the previous computer, and also the label of the codes (i.e., `code@computer`) will be renamed.
-* if a code with the same label exists, it gets duplicated and the label is not anymore unique and you will need to use
-  its *PK* to load it). If this happens with `./configure.py`, you possibly ran the script twice, and you have better remove
-  the duplicate with `verdi code delete` (or, if you already used it `verdi node delete {PK}`, but all your calculations
-  associated to this code will also be removed!)
+Note:
+* if a computer with the same name exists it won't be set up again. You can `verdi computer rename` the label the previous computer.
+* if a code with the same label exists, it *will* set up a new code with the same label, so the label is no longer unique (you will need to use the *PK* to refer to the code).
+  You can remove codes using `verdi node delete <PK>` (note: all calculations associated to the code will also be removed).
 
 ### test computers
 ```
+verdi computer list
 verdi computer test fidis
+verdi code list
 ```
 
 ## 8. try out some examples
 
-Now that (some of) your computers and codes are configured, you can see them listed with `verdi code list`.
-You are ready to run some quick examples of work chains from the
-[aiida-lsmo repository](https://github.com/lsmo-epfl/aiida-lsmo).
+You are ready to run your first work chains from the [aiida-lsmo repository](https://github.com/lsmo-epfl/aiida-lsmo).
 For example:
 ```
 cd aiida-lsmo/examples
 verdi run run_IsothermWorkChain_HKUST-1.py raspa@localhost zeopp@localhost
 ```
-Read [here the documentation](https://aiida-lsmo.readthedocs.io/) of LSMO's work chain and calculation functions.
+See [the documentation](https://aiida-lsmo.readthedocs.io/) of LSMO's work chain and calculation functions.
