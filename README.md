@@ -2,7 +2,7 @@
 
 ## 1. install prerequisites
 
-[Install prerequisites](https://aiida-core.readthedocs.io/en/latest/install/quick_installation.html#prerequisites)
+[Install prerequisites](https://aiida.readthedocs.io/projects/aiida-core/en/latest/intro/installation.html#intro-install-prerequisites)
 from the AiiDA documentation.
 
 ## 2. install conda and create a new environment
@@ -82,7 +82,7 @@ If you haven't done so already
  * generate a ssh keypair using `ssh-keygen -t rsa`
  * set up passwordless access using `ssh-copy-id username@remote` for the clusters you want to use with AiiDA (e.g. fidis, deneb)
 
-See also [the AiiDA documentation](https://aiida-core.readthedocs.io/en/latest/get_started/computers.html).
+See also [the AiiDA documentation](https://aiida.readthedocs.io/projects/aiida-core/en/latest/howto/ssh.html).
 
 ### set up AiiDA computers and codes
 
@@ -95,7 +95,7 @@ cd aiida-lsmo-codes
 
 This scripts automates three steps: `verdi computer setup`, `verdi computer configure` and `verdi code setup`,
 which you can use whenever you need to add/modify/delete computers and computers.
-See [the AiiDA documentation](https://aiida-core.readthedocs.io/en/latest/get_started/computers.html#computer-setup-and-configuration) for more information.
+See [the AiiDA documentation](https://aiida.readthedocs.io/projects/aiida-core/en/latest/howto/run_codes.html?highlight=computers#managing-your-computers) for more information.
 
 Note:
 * if a computer with the same name exists it won't be set up again. You can `verdi computer rename` the label the previous computer.
