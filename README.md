@@ -16,7 +16,7 @@ conda init
 ```
 Create an enviroment `aiida1` with python 3.6 and activate this new environment
 ```
-conda create -n aiida -c conda-forge aiida-core aiida-core.services
+conda create -n aiida1 -c conda-forge aiida-core aiida-core.services
 conda activate aiida1
 ```
 Remember to always activate the environment before starting to use AiiDA.
