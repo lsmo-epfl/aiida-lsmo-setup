@@ -18,7 +18,6 @@ Create an enviroment `aiida1` with python 3.9 and activate this new environment
 ```
 conda create -n aiida1 python=3.9 -y
 conda activate aiida1
-conda install -c conda-forge aiida-core aiida-core.services
 ```
 Remember to always activate the environment before starting to use AiiDA.
 
