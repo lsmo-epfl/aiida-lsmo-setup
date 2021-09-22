@@ -2,7 +2,7 @@
 
 ## 1. install prerequisites
 
-[Install prerequisites](https://aiida.readthedocs.io/projects/aiida-core/en/latest/intro/installation.html#intro-install-prerequisites)
+[Install prerequisites](https://aiida.readthedocs.io/projects/aiida-core/en/latest/intro/get_started.html)
 from the AiiDA documentation.
 
 ## 2. install conda and create a new environment
@@ -14,9 +14,9 @@ bash Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda
 source "$HOME/miniconda/etc/profile.d/conda.sh"
 conda init
 ```
-Create an enviroment `aiida1` with python 3.6 and activate this new environment
+Create an enviroment `aiida1` with python 3.9 and activate this new environment
 ```
-conda create -n aiida1 python=3.6 -y
+conda create -n aiida1 python=3.9 -y
 conda activate aiida1
 ```
 Remember to always activate the environment before starting to use AiiDA.
