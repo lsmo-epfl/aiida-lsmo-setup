@@ -5,7 +5,7 @@ AIIDA_DIR=$AIIDA_PATH
 mkdir -p $AIIDA_DIR
 cd $AIIDA_DIR
 
-git -C aiida-core pull || git clone https://github.com/aiidateam/aiida-core.git --branch master
+git -C aiida-core pull || git clone https://github.com/aiidateam/aiida-core.git --branch main
 pip install -e aiida-core[testing,notebook]
 
 git -C aiida-cp2k pull || git clone https://github.com/aiidateam/aiida-cp2k.git --branch master
